@@ -27,14 +27,18 @@ gallery.addEventListener("click", onGalleryClick);
 
 function onGalleryClick(e) {
   e.preventDefault();
-  const instance = basicLightbox.create(`
-    <img src="${e.target.dataset.source}">`);
+  const currentImg = e.target;
+  if (currentImg.classList.contains("gallery__image")) {
+    const instance = basicLightbox.create(`
+    <img src="${currentImg.dataset.source}">`);
 
-  instance.show();
+    instance.show();
 
-    window.addEventListener("keydown", (e) => { 
-        if (e.code === 'Escape') { 
-            instance.close();
-        }
+    window.addEventListener("keydown", (e) => {
+      if (e.code === "Escape") {
+        instance.close();
+      }
     });
+  }
+  return;
 }
